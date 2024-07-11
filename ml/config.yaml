@@ -1,0 +1,15 @@
+type: exp  # sim or exp
+time_delay: 60  # seconds
+sleep_between_epochs: 0  # seconds
+running_time: 3600  # seconds
+
+wandb: False
+exp_name: '20240427_DMFC_long'
+path: D:\hongbin           # ./logs  C:/Users/EEL/PycharmProjects/MOR_RL/ml/
+
+algorithm: GA
+continue: False
+continue_ckpt: logs/sac_0alpha_0gamma/lightning_logs/version_3/checkpoints/running_model.ckpt
+
+
+model: mlp
