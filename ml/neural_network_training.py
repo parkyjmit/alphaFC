@@ -57,7 +57,7 @@ class CNN1D(nn.Module):
         return x
 
 
-class GAActor(nn.Module):
+class AlphaFCCritic(nn.Module):
     def __init__(self, n_actions) -> None:
         super().__init__()
         hidden = 128
@@ -86,21 +86,8 @@ class ReplayBuffer:
         self.buffer = deque(maxlen=int(1e5))
         df = pd.read_json(os.path.join(dir, 'real_database.json'))  # load database
 
-        # set cutoff reward as top 60% of the reward
-        # sorted_values = df.sort_values(by=['reward'], ascending=False)
-        # top_60_percent = sorted_values.head(int(len(sorted_values) * 0.6))
-        # cutoff = top_60_percent['reward'].iloc[-1].item()
-
-        # Set state, action dimension
-        # state_dim = np.array([col[:5] == 'state' for col in df.keys()]).sum() # count the number of state columns
-        # action_dim = np.array([col[:6] == 'action' for col in df.keys()]).sum()  # count the number of action columns
-
         # Store experiences
         for _, d in df.iterrows():
-            # if d['reward'] > cutoff:
-            # state = np.array([d[f'state_{i}'] for i in range(state_dim)], dtype=np.float32)
-            # action = [d[f'action_{i}'] for i in range(action_dim)]
-            # new_state = np.array([d[f'new_state_{i}'] for i in range(state_dim)], dtype=np.float32)
             state = d['state']
             action = d['action']
             new_state = d['new_state']
@@ -166,9 +153,6 @@ class MLData(torch.utils.data.Dataset):
         self.X = np.concatenate(Xs)
         self.action = np.concatenate(actions)
         self.Y = np.concatenate(Ys)
-        # self.X = np.concatenate([self.df['state'].to_numpy(), self.df['state'].to_numpy()[1:], self.df['state'].to_numpy()[:-1]])
-        # self.action = np.concatenate([self.df['action'].to_numpy(), self.df['action'].to_numpy()[:-1], self.df['action'].to_numpy()[1:]])
-        # self.Y = np.concatenate([self.df['reward'].to_numpy(), self.df['reward'].to_numpy()[:-1], self.df['reward'].to_numpy()[1:]])
         self.len = len(self.X)
 
     def __getitem__(self, index):
@@ -196,7 +180,7 @@ if __name__ == "__main__":
         print('Train loop')
         # Load actor model if exists
 
-        model = GAActor(n_actions=4)
+        model = AlphaFCCritic(n_actions=4)
         # if os.path.exists(os.path.join(directory, 'model.pt')):
         #     model.load_state_dict(torch.load(os.path.join(directory, 'model.pt')))
 

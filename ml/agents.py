@@ -10,7 +10,7 @@ import warnings
 from tqdm import tqdm
 from torch import optim
 import json
-from neural_network_training import GAActor, Experience
+from neural_network_training import AlphaFCCritic, Experience
 
 
 class Agent:
@@ -66,7 +66,7 @@ class Agent:
         return action, reward, done
 
 
-class AlphaFCAgent(Agent):
+class AlphaFCActor(Agent):
     def __init__(self, replay_buffer: deque) -> None:
         super().__init__(replay_buffer)
         self.start = 1
@@ -169,16 +169,13 @@ def load_actor(directory, n_actions):
     '''
     actor_dir = os.path.join(directory, 'running_actor.pt')
     print("actor dir", actor_dir)
-    actor = GAActor(n_actions)
+    actor = AlphaFCCritic(n_actions)
     if os.path.exists(actor_dir):
         try:
             actor.load_state_dict(torch.load(actor_dir))  # if exists, load the actor\
             print('Success to Load ML model')
         except:
             print('Fail to Load ML model')
-            # actor = GAActor(n_actions)  # just for stability
-    # else:
-    #     actor = GAActor(n_actions)
     actor.eval()
     return actor
 
