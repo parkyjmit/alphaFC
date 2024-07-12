@@ -6,8 +6,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from knockknock import slack_sender
 import yaml
 from environment_realworld import DMFCENV
-
-from agents import GAAgent, load_actor, load_target, save_database, load_database
+from agents import AlphaFCAgent, load_actor, load_target, save_database, load_database
 
 # Absolute path to this file
 current_file_path = os.path.abspath(__file__)
@@ -59,7 +58,7 @@ if __name__ == "__main__":
     model = args['model']
 
     env = DMFCENV(save_dir=directory, ckpt=ckpt)
-    agent = GAAgent(database)
+    agent = AlphaFCAgent(database)
 
     # get obs_size, n_actions, action_low, action_high
     obs_size = env.observation_space.shape[0]

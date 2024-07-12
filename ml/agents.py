@@ -7,11 +7,10 @@ import torch
 from torch import nn
 import os
 import warnings
-import pickle
 from tqdm import tqdm
 from torch import optim
 import json
-from conduct_rl_training import GAActor, Experience
+from neural_network_training import GAActor, Experience
 
 
 class Agent:
@@ -67,54 +66,7 @@ class Agent:
         return action, reward, done
 
 
-class TD3Agent(Agent):
-    def __init__(self, replay_buffer: deque) -> None:
-        super().__init__(replay_buffer)
-        self.start = 1
-        self.end = 0.01
-        self.frames = 2000  # how much step to reach end epsilon
-        self.global_step = 0
-
-    def get_epsilon(self) -> float:
-        '''
-        Get the exploration epsilon value for the current step
-        '''
-        if self.global_step > self.frames:
-            return self.end
-        return self.start - (self.global_step / self.frames) * (self.start - self.end)
-
-    def get_action(self, env: gym.Env, net: nn.Module, device: str) -> int:
-        """Using the given network, decide what action to carry out using an noisy exploration policy.
-
-        Args:
-            net: Actor network
-            epsilon: value to determine likelihood of taking a random action
-            device: current device
-
-        Returns:
-            action
-        """
-        if env.state is None:
-            action = torch.tensor([0., 0., 1., 1.], dtype=torch.float32)
-        else:
-            # Prepare state as torch tensor
-            state = torch.tensor(env.state, dtype=torch.float32)
-
-            # Get epsilon for exploration
-            epsilon = self.get_epsilon()
-            self.global_step += 1
-
-            # Get action from network with exploration
-            perturbation = torch.tensor(np.random.normal(0, epsilon, size=env.action_space.shape[0]),
-                                        dtype=torch.float32).to(device)
-            low = torch.tensor(env.action_space.low).to(device)
-            high = torch.tensor(env.action_space.high).to(device)
-            action = net(state) + perturbation * (high - low) / 2
-            action = action.clip(low, high)
-        return action
-
-
-class GAAgent(Agent):
+class AlphaFCAgent(Agent):
     def __init__(self, replay_buffer: deque) -> None:
         super().__init__(replay_buffer)
         self.start = 1
@@ -136,17 +88,11 @@ class GAAgent(Agent):
         '''
         Get the action from the model
         '''
-<<<<<<< HEAD
-        if env.state is None:
-            action = torch.tensor([0., 0., 1., 1.], dtype=torch.float32)
-        elif len(self.replay_buffer) < 2000:
-=======
         if env.state is None or len(self.replay_buffer) < 2:
         #     high = torch.tensor(env.action_space.high, dtype=torch.float32).to(device)
         #     action = high
         #     # action = torch.tensor([0.4, 0.65, 0.31,1.5], dtype=torch.float32).to(device)
         # elif len(self.replay_buffer) < 20:
->>>>>>> e92647a117b61e7a02184d4789f6436f9a73639e
             # low부터 high까지의 random action
             low = torch.tensor(env.action_space.low, dtype=torch.float32).to(device)
             high = torch.tensor(env.action_space.high, dtype=torch.float32).to(device)

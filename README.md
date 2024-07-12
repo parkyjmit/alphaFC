@@ -22,99 +22,50 @@ This repository contains two main components for controlling a DMFC system using
 1. **Fuel Cell Operation Control**: The code operates the fuel cell and adjusts the output power based on the control signals from a neural network.
 2. **Neural Network Training**: The code trains the neural network using data obtained from the fuel cell operation.
 
-## 1. Environment
-The exported environment is provided.
-```
-conda env create -f environment.yaml
-conda activate alphaFC
-```
-## 2. How to run
-1. Determine saving folder
-   - `config.yaml` change line 6
-2. Copy and paste following files in the directory
-   - `running_actor.pt`
-   - `running_model.pt`
-   - `target.json`
-3. If you want to change the strategy
-    - go to `agents.py` line 55,56
-    - if both commented, then our model
-4. type the code in the terminal`python .\ml\conduct_experiment.py`
-
-
-## Components
+## 1. Install
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/parkyjmit/alphaFC.git
+    cd alphaFC
+    ```
+2. The exported environment is provided. This work is optimized for Windows OS, since our work utilizes EC-Lab software, mainly works on Windows.
+    ```bash
+    conda env create -f environment.yaml
+    conda activate alphaFC
+    ```
+## 2. Components
 
 ### 1. Fuel Cell Operation Control
 - **Description**: This module controls the fuel cell to obtain the desired output power.
 - **Functionality**: 
   - Uses a neural network to control the output power.
-  - If a trained neural network is available, it will be used to control the fuel cell.
-  - If no trained neural network is available, a randomly initialized neural network will be used.
+  - The script checks for the presence of a trained neural network model.
+    - If a trained neural network is available, it will be used to control the fuel cell.
+    - If no trained neural network is available, a randomly initialized neural network will be used.
 - **Files**: 
   - `config.yaml`: Determine configuration of operation. 
-  - `target.json`: 
-  - `fuel_cell_control.py`: Main script for controlling the fuel cell.
-  - `running_actor.pt`
-  - `running_model.pt`
+  - `target.json`: To control the output power of the DMFC. It can be modified during the cell operation.
+  - `fuel_cell_control.py`: Main script for operation of the fuel cell.
+  - `running_actor.pt`: The trained neural network which plays a role as an actor of the dynamic control system. If it doesn't exist, the algorithm define randomly initialized neural network.
+  - `real_database.json` or `sim_database.json`: The cell operation is recorded in this file.
+- **How to run**:
+  - Run `python .\ml\fuel_cell_control_experiment.py` to operate the DMFC.
 
 ### 2. Neural Network Training
 - **Description**: This module trains the neural network using data obtained from the fuel cell operation.
 - **Functionality**:
-  - Collects data from the fuel cell operation.
-  - Trains the neural network using the collected data.
+  - Trains the critic neural network module using the collected data.
+  - The script saves the trained neural network model for later use.
 - **Files**:
-  - `config.yaml`: Determine configuration of operation.
-  - `neural_network_training.py`: Main script for training the neural network.
-
-## Workflow
-
-1. **Data Collection and Training**:
-   - Run the `neural_network_training.py` script to collect data from the fuel cell and train the neural network.
-   - The script saves the trained neural network model for later use.
-
-2. **Fuel Cell Control**:
-   - Run the `fuel_cell_control.py` script to operate the fuel cell.
-   - The script checks for the presence of a trained neural network model.
-   - If a trained model is found, it will be used for controlling the fuel cell.
-   - If no trained model is found, a randomly initialized neural network will be used instead.
-
-## Getting Started
-
-### Prerequisites
-- Python 3.x
-- Required Python libraries (see `requirements.txt` for details)
-
-### Installation
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/fuel-cell-control.git
-    cd fuel-cell-control
-    ```
-2. Install the required libraries:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-### Usage
-
-1. **Train the Neural Network**:
-    ```bash
-    python neural_network_training.py
-    ```
-
-2. **Control the Fuel Cell**:
-    ```bash
-    python fuel_cell_control.py
-    ```
-
-## Contributing
-
-We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
+  - `config.yaml`: Determine configuration of training.
+  - `neural_network_training.py`: Main script for training the neural network. 
+  - `running_model.pt`: The neural network on training phase. 
+- **How to run**:
+  - Run `python .\ml\neural_network_training.py` to train the critic neural network module from collected data.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. 
 
-## Contact
-
-If you have any questions, feel free to reach out to us at [your-email@example.com](mailto:your-email@example.com).
-
+# Cite this work
+Citation information will be provided soon.

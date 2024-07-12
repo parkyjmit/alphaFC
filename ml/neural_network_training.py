@@ -12,7 +12,6 @@ import sys
 import os
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from environment_simulation import DMFCENV
 import time
 
 # Absolute path to this file
