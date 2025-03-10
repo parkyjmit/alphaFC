@@ -21,6 +21,8 @@ This repository contains two main components for controlling a DMFC system using
 
 1. **Fuel Cell Operation Control**: The code operates the fuel cell and adjusts the output power based on the control signals from a neural network.
 2. **Neural Network Training**: The code trains the neural network using data obtained from the fuel cell operation.
+## 0. System requirement
+Our $\alpha$ Fuel Cell is developed on a Windows OS with Intel i5 CPU hardware. This code does not require a GPU system for training. To train and run the DMFC control system, you may need additional half-cell DMFC hardware, as described in our manuscript.
 
 ## 1. Install
 1. Clone the repository:
