@@ -1,7 +1,6 @@
 # $\alpha$ Fuel Cell
 This is the codebase of the paper titled **An Actor-Critic Algorithm to Maximize the Power Delivered from Direct Methanol Fuel Cells**.
 
-## Abstract
 Hongbin Xu $^{1\dagger}$, Yang Jeong Park1 $^{1,2\dagger}$. Zhichu Ren $^{1}$, Daniel J. Zheng $^{1}$, Davide Menga $^{1}$, Haojun Jia $^{3}$, Chenru Duan $^{3}$, Guanzhou Zhu $^{1}$, Yuriy Román-Leshkov $^{3}$, Yang Shao-Horn $^{1,4*}$, Ju Li $^{1,2*}$   
 
 1 Department of Materials Science and Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA
@@ -13,6 +12,7 @@ Hongbin Xu $^{1\dagger}$, Yang Jeong Park1 $^{1,2\dagger}$. Zhichu Ren $^{1}$, D
 
 *Corresponding author. Email: shaohorn@mit.edu (Yang Shao-Horn); liju@mit.edu (Ju Li)
 
+## Abstract
 Optimizing nonlinear time-dependent control in complex energy systems like direct methanol fuel cells (DMFCs) is a crucial engineering challenge. The long-term power delivery of DMFCs deteriorates as the electrocatalytic surfaces become fouled. Dynamic voltage adjustment can clean the surface and recover the activity of catalysts; however, manually identifying optimal control strategies considering multiple mechanisms is challenging. Here we demonstrated a nonlinear policy model (Alpha-Fuel-Cell) inspired by actor-critic reinforcement learning (RL), which learns directly from real-world current-time trajectories to infer the state of catalysts during operation and generates a suitable action for the next time step automatically. Moreover, the model can provide protocols to achieve the required power while significantly slowing the degradation of catalysts. Benefiting from this model, the time-averaged power delivered is 153% compared to constant-potential operation for DMFCs over 12 hours. Our framework may be generalized to other energy device applications requiring long-time-horizon decision-making in the real world.
 
 # Fuel Cell Control and Neural Network Training
