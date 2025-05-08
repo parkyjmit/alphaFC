@@ -1,19 +1,19 @@
 # $\alpha$ Fuel Cell
-This is the codebase of the paper titled **Alpha-Fuel-Cell: Maximizing Delivered Power for Direct Methanol Fuel Cell with Actor-Critic Algorithm**.
+This is the codebase of the paper titled **An Actor-Critic Algorithm to Maximize the Power Delivered from Direct Methanol Fuel Cells**.
 
 ## Abstract
-Hongbin Xu $^{1\dagger}$, Yang Jeong Park1 $^{2\dagger}$. Zhichu Ren $^{1}$, Daniel J. Zheng $^{1}$, Haojun Jia $^{2}$, Chenru Duan $^{2}$, Guanzhou Zhu $^{1}$, Yuriy Román-Leshkov $^{2}$, Yang Shao-Horn $^{1,3*}$, Ju Li $^{1,4*}$   
+Hongbin Xu $^{1\dagger}$, Yang Jeong Park1 $^{1,2\dagger}$. Zhichu Ren $^{1}$, Daniel J. Zheng $^{1}$, Davide Menga $^{1}$, Haojun Jia $^{3}$, Chenru Duan $^{3}$, Guanzhou Zhu $^{1}$, Yuriy Román-Leshkov $^{3}$, Yang Shao-Horn $^{1,4*}$, Ju Li $^{1,2*}$   
 
-1 Department of Materials Science and Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA   
-2 Department of Chemical Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA   
-3 Department of Mechanical Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA   
-4 Department of Nuclear Science and Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA   
+1 Department of Materials Science and Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA
+2 Department of Nuclear Science and Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA 
+3 Department of Chemical Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA 
+4 Department of Mechanical Engineering, Massachusetts Institute of Technology; Cambridge, MA 02139, USA 
 
 † These authors contributed equally: Hongbin Xu, Yang Jeong Park
 
 *Corresponding author. Email: shaohorn@mit.edu (Yang Shao-Horn); liju@mit.edu (Ju Li)
 
-Taking time-dependent actions to tune the performance of complex energy systems is desirable. Fuel cell should economically delivered the maximum power over a long time period, but as the electrocatalytic surfaces become fouled, theirits performance decays over time. Changing the potential dynamically during operation can clean the surface and recover the activity of catalysts for direct methanol fuel cells (DMFCs). However, manual experiments and parameter adjustments face many drawbacks. Here we developed and demonstrated a nonlinear policy model (Alpha-Fuel-Cell) inspired by actor-critic reinforcement learning (RL) to control and maximize the time-averaged delivered power for DMFCs. Our policy model learns directly from real-world electrical current trajectories to infer the state of catalysts during operation. Combineding with the action parameters, the cell power can be predicted and a suitable action for the next step is generated automatically, which can be utilized to further maximize the delivered power in the period. Moreover, the model can provide protocols to achieve the required power while significantly slowing the degradation of catalysts significantly. Benefiting from this model, the time-averaged power delivered is 285.2% and 153.8% compared to steady operation for three-electrode cells and DMFCs in over 12 hours, respectively. Our framework can be generalized to other energy applications requiring long time horizon decision-making in the real world. 
+Optimizing nonlinear time-dependent control in complex energy systems like direct methanol fuel cells (DMFCs) is a crucial engineering challenge. The long-term power delivery of DMFCs deteriorates as the electrocatalytic surfaces become fouled. Dynamic voltage adjustment can clean the surface and recover the activity of catalysts; however, manually identifying optimal control strategies considering multiple mechanisms is challenging. Here we demonstrated a nonlinear policy model (Alpha-Fuel-Cell) inspired by actor-critic reinforcement learning (RL), which learns directly from real-world current-time trajectories to infer the state of catalysts during operation and generates a suitable action for the next time step automatically. Moreover, the model can provide protocols to achieve the required power while significantly slowing the degradation of catalysts. Benefiting from this model, the time-averaged power delivered is 153% compared to constant-potential operation for DMFCs over 12 hours. Our framework may be generalized to other energy device applications requiring long-time-horizon decision-making in the real world.
 
 # Fuel Cell Control and Neural Network Training
 
