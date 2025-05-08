@@ -64,7 +64,6 @@ Our $\alpha$ Fuel Cell is developed on a Windows OS with Intel i5 CPU hardware. 
   - `running_model.pt`: The neural network on training phase. 
 - **How to run**:
   - Run `python .\ml\neural_network_training.py` to train the critic neural network module from collected data.
-    - We provide our data file, `all_data.7z`, for reproducing the model training.
 
 ## License
 
